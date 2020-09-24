@@ -122,6 +122,8 @@
 #include "linux_loop.h"
 #include "uname.h"
 
+#include "sgx_user.h"
+
 #include "qemu.h"
 #include "qemu/guest-random.h"
 #include "qemu/selfmap.h"
@@ -5703,6 +5705,15 @@ static abi_long do_ioctl_drm_i915(const IOCTLEntry *ie, uint8_t *buf_temp,
 
 #endif
 
+static abi_long do_ioctl_sgx_ioc_enclave_create(const IOCTLEntry *ie, uint8_t *buf_temp,
+                                     int fd, int cmd, abi_long arg)
+{
+    //abi_long ret;
+    qemu_log_mask(LOG_UNIMP,
+                      "In side do_ioctl_sgx_ioc_enclave_create\n");
+    return -TARGET_EOWNERDEAD;
+}
+
 IOCTLEntry ioctl_entries[] = {
 #define IOCTL(cmd, access, ...) \
     { TARGET_ ## cmd, cmd, #cmd, access, 0, {  __VA_ARGS__ } },
@@ -5713,6 +5724,9 @@ IOCTLEntry ioctl_entries[] = {
 #include "ioctls.h"
     { 0, 0, },
 };
+
+
+
 
 /* ??? Implement proper locking for ioctls.  */
 /* do_ioctl() Must return target values and target errnos. */
@@ -5805,6 +5819,7 @@ static abi_long do_ioctl(int fd, int cmd, abi_long arg)
     }
     return ret;
 }
+
 
 static const bitmask_transtbl iflag_tbl[] = {
         { TARGET_IGNBRK, TARGET_IGNBRK, IGNBRK, IGNBRK },
