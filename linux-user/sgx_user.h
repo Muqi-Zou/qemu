@@ -80,6 +80,9 @@
 #define SGX_IOC_ENCLAVE_PAGE_REMOVE \
 	_IOW(SGX_MAGIC, 0x0d, unsigned long)
 
+#define SGX_IOC_ENCLAVE_ADD_PAGES_IN_KERNEL \
+	_IOWR(SGX_MAGIC, 0x01, struct sgx_enclave_add_pages_in_kernel)
+
 /* SGX leaf instruction return values */
 #define SGX_SUCCESS			0
 #define SGX_INVALID_SIG_STRUCT		1
@@ -118,6 +121,26 @@
 struct sgx_enclave_create  {
 	__u64	src;
 } __attribute__((__packed__));
+
+/**
+ * struct sgx_enclave_add_pages_in_kernel - parameter structure for the
+ *                                %SGX_IOC_ENCLAVE_ADD_PAGE ioctl
+ * @src:	start address for the page data
+ * @offset:	starting page offset
+ * @length:	length of the data (multiple of the page size)
+ * @secinfo:address for the SECINFO data
+ * @flags:	page control flags
+ * @count:	number of bytes added (multiple of the page size)
+ */
+struct sgx_enclave_add_pages_in_kernel {
+	__u64	src;
+	__u64	offset;
+	__u64	length;
+	__u64	secinfo;
+	__u64	flags;
+	__u64	count;
+} __attribute__((packed));
+
 
 /**
  * struct sgx_enclave_add_page - parameter structure for the

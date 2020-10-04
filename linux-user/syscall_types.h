@@ -65,10 +65,44 @@ struct loop_info64 {
 struct sgx_enclave_create  {
 	__u64	src;
 } __attribute__((__packed__));
+struct sgx_enclave_add_pages_in_kernel {
+	__u64	src;
+	__u64	offset;
+	__u64	length;
+	__u64	secinfo;
+	__u64	flags;
+	__u64	count;
+} __attribute__((packed));
+struct sgx_enclave_add_page {
+	__u64	addr;
+	__u64	src;
+	__u64	secinfo;
+	__u16	mrmask;
+} __attribute__((__packed__));
+
 */
 STRUCT(sgx_enclave_create,
        TYPE_ULONGLONG
 )
+
+STRUCT(sgx_enclave_add_pages_in_kernel,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG
+)
+//we use short for u16 since they are both 2 btyes long
+//check function thunk_type_size and thunk_type_align
+STRUCT(sgx_enclave_add_page,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG,
+       TYPE_ULONGLONG,
+       TYPE_SHORT
+)
+
+
 
 STRUCT(winsize,
        TYPE_SHORT, TYPE_SHORT, TYPE_SHORT, TYPE_SHORT)

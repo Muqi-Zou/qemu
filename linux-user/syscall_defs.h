@@ -972,7 +972,11 @@ struct target_rtc_pll_info {
 /* For sgx */
 #define TARGET_SGX_IOC_ENCLAVE_CREATE \
 	TARGET_IOW(SGX_MAGIC, 0x00, struct sgx_enclave_create)
-    
+#define TARGET_SGX_IOC_ENCLAVE_ADD_PAGES_IN_KERNEL \
+	TARGET_IOWR(SGX_MAGIC, 0x01, struct sgx_enclave_add_pages_in_kernel)
+#define TARGET_SGX_IOC_ENCLAVE_ADD_PAGE \
+	TARGET_IOW(SGX_MAGIC, 0x01, struct sgx_enclave_add_page)
+
 /* From <linux/fd.h> */
 
 #define TARGET_FDMSGON        TARGET_IO(2, 0x45)

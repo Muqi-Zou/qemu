@@ -1,6 +1,8 @@
      /* emulated ioctl list */
 
      IOCTL_SPECIAL(SGX_IOC_ENCLAVE_CREATE, IOC_W, do_ioctl_sgx_ioc_enclave_create, MK_PTR(MK_STRUCT(STRUCT_sgx_enclave_create)))
+     IOCTL_SPECIAL(SGX_IOC_ENCLAVE_ADD_PAGES_IN_KERNEL, IOC_RW, do_ioctl_sgx_ioc_enclave_add_pages_in_kernel, MK_PTR(MK_STRUCT(STRUCT_sgx_enclave_add_pages_in_kernel)))
+     IOCTL_SPECIAL(SGX_IOC_ENCLAVE_ADD_PAGE,IOC_W, do_ioctl_sgx_ioc_enclave_add_page, MK_PTR(MK_STRUCT(STRUCT_sgx_enclave_add_page)))
      IOCTL(TCGETS, IOC_R, MK_PTR(MK_STRUCT(STRUCT_termios)))
      IOCTL(TCSETS, IOC_W, MK_PTR(MK_STRUCT(STRUCT_termios)))
      IOCTL(TCSETSF, IOC_W, MK_PTR(MK_STRUCT(STRUCT_termios)))
